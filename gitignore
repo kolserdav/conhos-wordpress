@@ -1,0 +1,6 @@
+/wp-content/uploads/
+/wp-content/cache/
+/wp-config.php
+/.htaccess
+/node_modules/
+/vendor/
