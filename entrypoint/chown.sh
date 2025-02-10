@@ -1,19 +1,13 @@
 #! /usr/bin/bash
 
-set -e
-
 fpm_user=www-data
 app_dir="."
-git_dir=.git
+git=.git
 
-echo "Change app dir ($app_dir) owner: $fpm_user, except dir $gigit_dirt"
-
-git_owner=$(stat -c "%U:%G" "$app_dir/$git_dir")
+echo "Change app dir ($app_dir) owner: $fpm_user, except dir $git"
 
 mkdir -p "$app_dir"
-chown "$fpm_user":"$fpm_user" -R $app_dir
-# Chown git owner back, else git runner won't work
-chown "$git_owner":"$git_owner" -R "$app_dir/$git_dir"
+find "$app_dir" -path "$app_dir"/$git -prune -o -exec chown "$fpm_user":"$fpm_user" -R {} +
 
 # Run default entrypoint
 exec "$@"
