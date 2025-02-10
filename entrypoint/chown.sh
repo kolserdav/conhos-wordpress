@@ -3,12 +3,13 @@
 set -e
 
 fpm_user=www-data
-upload_dir=wp-content/uploads
+wp_content_dir=wp-content
+uploads_dir="$wp_content_dir"/uploads
 
-echo "Change dir ($app_dir) owner: $fpm_user"
+echo "Change dir ($uploads_dir) owner: $fpm_user"
 
-mkdir -p "$upload_dir"
-chown "$fpm_user":"$fpm_user" -R "$upload_dir"
+mkdir -p "$uploads_dir"
+chown "$fpm_user":"$fpm_user" -R "$uploads_dir"
 
 # Run default entrypoint
 exec "$@"
