@@ -1,19 +1,14 @@
 #! /usr/bin/bash
 
-set -e
+#! /usr/bin/bash
 
-fpm_user=www-data
-app_dir="."
-git_dir=.git
+ftp_user=www-data
+upload_dir=wp-content/uploads
 
-echo "Change app dir ($app_dir) owner: $fpm_user, except dir $gigit_dirt"
+echo "Change dir ($app_dir) owner: $fpm_user"
 
-git_owner=$(stat -c "%U:%G" "$app_dir/$git_dir")
-
-mkdir -p "$app_dir"
-chown "$fpm_user":"$fpm_user" -R $app_dir
-# Chown git owner back, else git runner won't work
-chown "$git_owner":"$git_owner" -R "$app_dir/$git_dir"
+mkdir -p "$upload_dir"
+chown "$ftp_user":"$ftp_user" -R "$upload_dir"
 
 # Run default entrypoint
 exec "$@"
